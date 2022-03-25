@@ -32,8 +32,8 @@ Then run 'npm start' on another port (could be localhost:3001)
 Endpoints : - `http://localhost:3000/${userId}`
 **Warning, currently only two users have been mocked. They have userId 12 and 18 respectively.**
 Examples of queries :
-- `http://localhost:3000/12` - Retrieves user 12's dashboard.
-- `http://localhost:3000/18` - Retrieves user 18's dashboard
+- `http://localhost:3000/12` - Retrieves user 12's main information.
+- `http://localhost:3000/18` - Retrieves user 18's main information.
 
 ********************************************************************************************************
 ********************************************************************************************************
