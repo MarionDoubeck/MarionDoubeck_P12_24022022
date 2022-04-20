@@ -24,10 +24,10 @@ Examples of queries
 
 
 # 3. Launching Frontend :
-Get frontend on : https://github.com/MarionDoubeck/MarionDoubeck_P12_24022022
-Open it in terminal
-Run 'npm i'
-Then run 'npm start' on another port (could be localhost:3001)
+- Get frontend on : https://github.com/MarionDoubeck/MarionDoubeck_P12_24022022
+- Open it in terminal
+- Run 'npm i'
+- Then run 'npm start' on another port (could be localhost:3001)
 
 Endpoints : - `http://localhost:3000/${userId}`
 **Warning, currently only two users have been mocked. They have userId 12 and 18 respectively.**
