@@ -1,11 +1,16 @@
 import React from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer  } from 'recharts';
+import { PropTypes } from "prop-types"
 
-
+/**
+ * @description This function will accept client's data and return a bar chart
+ * @param {{id: number, sessions: array}} props contains :
+ *        "id" the client id
+ *        "sessions" an array of objects containing 3 keys : "day", "kilogram", "calories"
+ * @returns {HTMLElement} BarChart
+ */
 const DailyActivityGraph = (props) => {
   const {data} = props;
-  console.log(data);
-  data.sessions.map(s => {s.day=s.day});
   return (
     <ResponsiveContainer id="dailyActivity">
       <BarChart 
@@ -27,5 +32,9 @@ const DailyActivityGraph = (props) => {
     </ResponsiveContainer>
   );
 };
+
+DailyActivityGraph.propTypes = {
+  props: PropTypes.object
+}
 
 export default DailyActivityGraph;

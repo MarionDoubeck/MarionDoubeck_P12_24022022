@@ -1,23 +1,21 @@
 import React from 'react';
 import { LineChart, Line, XAxis, Tooltip, ResponsiveContainer} from 'recharts';
 import CustomToolTip from './CustomTooltip';
+import { PropTypes } from "prop-types"
 
+/**
+ * @description This function will accept client's sessions data and return a line chart
+ * @param {{id: number, sessions: array}} props contains :
+ *        "id" the client id
+ *        "sessions" an array of objects containing 3 keys : "day", "sessionLength", "dayLetter" (first letter of day name)
+ * @returns {HTMLElement} LineChart
+ */
 const DurationGraph = (props) => {
   const {data} = props;
   const semaine = ["L", "M", "M", "J", "V", "S", "D"]
   for (let i=0; i<data.sessions.length; i++){
     data.sessions[i].dayLetter = semaine[i];
   }
-/* 
-  const CustomToolTip = ({ active, payload }) => {
-    console.log (active,payload)
-    if (!active || !tooltip)    return null
-    for (const bar of payload)
-        if (bar.dataKey === tooltip)
-            return <div>{ bar.name }<br/>{ bar.value.toFixed(2) }</div> 
-    return null
-}
-*/
   return (
     <ResponsiveContainer id="duration">
       <LineChart  width="100%" height="100%" data={data.sessions}>
@@ -33,4 +31,7 @@ const DurationGraph = (props) => {
   );
 };
 
+DurationGraph.propTypes = {
+  props: PropTypes.object
+}
 export default DurationGraph;

@@ -1,6 +1,22 @@
 import React from 'react';
-import { RadialBarChart, RadialBar, ResponsiveContainer, Legend, PolarAngleAxis, clockWise  } from 'recharts';
+import { RadialBarChart, RadialBar, ResponsiveContainer, Legend, PolarAngleAxis} from 'recharts';
+import { PropTypes } from "prop-types"
 
+/**
+ * @description This function will accept main data of the client and return a radial bar chart
+ * @param {object} props with keys : 
+ * age
+ * calorieCount
+ * carbohydrateCount
+ * firstName
+ * id
+ * lastName
+ * lipidCount
+ * proteinCount
+ * score
+ * todayScore
+ * @returns {HTMLElement} RadialBarChart
+ */
 const ScoreGraph = (props) => {
   const {data} = props;
   const score = [
@@ -33,5 +49,9 @@ const ScoreGraph = (props) => {
     </ResponsiveContainer>
   );
 };
+
+ScoreGraph.propTypes = {
+  props: PropTypes.object,
+}
 
 export default ScoreGraph;

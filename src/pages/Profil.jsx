@@ -2,7 +2,12 @@ import React from 'react';
 import Navigation from '../components/Navigation';
 import LeftBar from '../components/LeftBar';
 import Logo from '../components/Logo';
+import { PropTypes } from "prop-types"
 
+/**
+ * @description This function will return a page content
+ * @param {string} memberId
+ */
 const Profil = (props) => {
   let {memberId} = props;
   return (
@@ -16,5 +21,8 @@ const Profil = (props) => {
     </div>
   );
 };
-
+Profil.propTypes = {
+  props: PropTypes.object,
+  memberId: PropTypes.string
+}
 export default Profil;

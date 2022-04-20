@@ -1,5 +1,11 @@
 import axios from 'axios';
 
+/**
+ * @description gets user activities data from backend
+ * backend must run on localhost:3000, otherwise change line 9
+ * imports all user data with Axios
+ */
+
 const baseURL = axios.create({
   baseURL: "http://localhost:3000/user",
 });

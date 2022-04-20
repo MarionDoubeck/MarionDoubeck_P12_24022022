@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: pages/Home.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: pages/Home.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useEffect, useState } from "react";
+import Logo from "../components/Logo";
+import Navigation from "../components/Navigation";
+import LeftBar from "../components/LeftBar";
+import DailyActivityGraph from "../components/Graphs/DailyActivityGraph";
+import ScoreGraph from "../components/Graphs/ScoreGraph.jsx";
+import ActivityType from "../components/Graphs/ActivityType";
+import DurationGraph from "../components/Graphs/DurationGraph";
+import KeyData from "../components/Graphs/KeyData"
+import loader from "./../assets/loader.svg";
+import NotFound from "./NotFound";
+import { getUserMainData, getUserActivity, getUserAverageSessions, getUserPerformance } from "../utils/GetUserActivity";
+import { FormatUserMainData, FormatUserActivity, FormatUserAverageSessions, FormatUserPerformance } from "../utils/FormatUserMainData";
+import { PropTypes } from "prop-types"
+
+/**
+ * @description This component handles user's home page.
+ * Data is loaded in this component and is set with {useState} hook.
+ * The API call is done in this component and all graphs are rendered from this component.
+ * 
+ */
+const Home = (props) => {
+  let {memberId} = props;
+  const userId = memberId;
+
+  //User's  main data
+  const [mainData, setMainData] = useState({});
+  const [mainDataIsLoaded, setMainDataIsLoaded] = useState(false);
+  const [mainDataError, setMainDataError] = useState(false);
+
+  //User's  activity  data
+  const [activityData, setActivityData] = useState({});
+  const [activityDataIsLoaded, setActivityDataIsLoaded] = useState(false);
+  const [activityDataError, setActivityDataError] = useState(false);
+
+  //User's average data
+  const [averageData, setAverageData] = useState({});
+  const [averageDataIsLoaded, setAverageDataIsLoaded] = useState(false);
+  const [averageDataError, setAverageDataError] = useState(false);
+
+  //User's Performance data
+  const [performanceData, setPerformanceData] = useState({});
+  const [performanceDataIsLoaded, setPerformanceDataIsLoaded] = useState(false);
+  const [performanceDataError, setPerformanceDataError] = useState(false);
+
+  useEffect(() => {
+    async function getMainData() {
+      try {
+        const response = await getUserMainData(userId);
+        setMainData(new FormatUserMainData(response.data.data));
+        setMainDataIsLoaded(true);
+      } catch (error) {
+        setMainDataError(true);
+        console.log("Error:", error.response.data, "main data");
+      }
+    }
+
+    async function getActivityData() {
+      try {
+        const response = await getUserActivity(userId);
+        setActivityData(new FormatUserActivity(response.data.data));
+        setActivityDataIsLoaded(true);
+      } catch (error) {
+        setActivityDataError(true);
+        console.log("Error:", error.response.data, "activity data");
+      }
+    }
+
+    async function getAverageData() {
+      try {
+        const response = await getUserAverageSessions(userId);
+        setAverageData(new FormatUserAverageSessions(response.data.data));
+        setAverageDataIsLoaded(true);
+      } catch (error) {
+        setAverageDataError(true);
+        console.log("Error:", error.response.data, "average data");
+      }
+    }
+
+    async function getPerformance() {
+      try {
+        const response = await getUserPerformance(userId);
+        setPerformanceData(new FormatUserPerformance(response.data.data));
+        setPerformanceDataIsLoaded(true);
+      } catch (error) {
+        setPerformanceDataError(true);
+        console.log("Error:", error, "performance data");
+      }
+    }
+
+    getMainData();
+    getActivityData();
+    getAverageData();
+    getPerformance();
+  }, [userId]);
+
+  if ((!mainDataIsLoaded || !activityDataIsLoaded || !averageDataIsLoaded || !performanceDataIsLoaded) &amp;&amp; (!mainDataError || !averageDataError || !activityDataError || !performanceDataError)) {
+    return (
+      &lt;div className="loading">
+        &lt;img className="loader" src={loader} alt="Loading..." />
+      &lt;/div>
+    );
+  }
+  if (mainDataError || averageDataError || activityDataError || performanceDataError) return &lt;NotFound />;
+
+  return (
+  &lt;div className='home generalContent'>
+    &lt;div className="logo">&lt;Logo memberId={memberId}/>&lt;/div>
+    &lt;div className="navigation">&lt;Navigation memberId={memberId}/>&lt;/div>
+    &lt;div className="leftBar">&lt;LeftBar />&lt;/div>
+    &lt;div className="content">
+      &lt;h1>Bonjour &lt;span id="firstName">{mainData.firstName}&lt;/span>&lt;/h1>
+      &lt;p>Félicitations ! vous avez explosé vos objectifs hier &amp;#128079;&lt;/p>
+      &lt;div className="homeGraphs">
+          &lt;div className="dailyActivityGraph">
+            &lt;DailyActivityGraph data={activityData} />
+          &lt;/div>
+          &lt;div className="otherGraphs">
+            &lt;div className="graph">
+              &lt;div className="durationColors">
+                &lt;div className="durationRight">&lt;/div>
+              &lt;/div>
+              &lt;div className="durationGraphContainer">
+                &lt;DurationGraph data={averageData} />
+              &lt;/div>
+            &lt;/div>
+            &lt;div className="graph">
+              &lt;ActivityType data={performanceData} />
+            &lt;/div>
+            &lt;div className="graph">
+              &lt;span id="scoreTitle">Score&lt;/span>
+              &lt;ScoreGraph data={mainData} />
+            &lt;/div>
+          &lt;/div>
+          &lt;div className="keyData">
+            &lt;KeyData data={mainData} />
+        &lt;/div>
+      &lt;/div>
+    &lt;/div>
+  &lt;/div>
+  );
+};
+Home.propTypes = {
+  props: PropTypes.object,
+  memberId: PropTypes.string
+}
+export default Home;</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="FormatUserActivity.html">FormatUserActivity</a></li><li><a href="FormatUserAverageSessions.html">FormatUserAverageSessions</a></li><li><a href="FormatUserMainData.html">FormatUserMainData</a></li><li><a href="FormatUserPerformance.html">FormatUserPerformance</a></li></ul><h3>Global</h3><ul><li><a href="global.html#ActivityType">ActivityType</a></li><li><a href="global.html#App">App</a></li><li><a href="global.html#baseURL">baseURL</a></li><li><a href="global.html#Communaute">Communaute</a></li><li><a href="global.html#CustomToolTip">CustomToolTip</a></li><li><a href="global.html#DailyActivityGraph">DailyActivityGraph</a></li><li><a href="global.html#DurationGraph">DurationGraph</a></li><li><a href="global.html#GetUserData">GetUserData</a></li><li><a href="global.html#Home">Home</a></li><li><a href="global.html#KeyData">KeyData</a></li><li><a href="global.html#LeftBar">LeftBar</a></li><li><a href="global.html#Logo">Logo</a></li><li><a href="global.html#Navigation">Navigation</a></li><li><a href="global.html#NotFound">NotFound</a></li><li><a href="global.html#Profil">Profil</a></li><li><a href="global.html#Reglage">Reglage</a></li><li><a href="global.html#ScoreGraph">ScoreGraph</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.10</a> on Wed Apr 20 2022 11:41:27 GMT+0200 (heure d’été d’Europe centrale)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

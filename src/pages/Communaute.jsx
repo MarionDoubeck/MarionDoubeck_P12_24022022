@@ -2,8 +2,14 @@ import React from 'react';
 import Navigation from '../components/Navigation';
 import LeftBar from '../components/LeftBar';
 import Logo from '../components/Logo';
+import { PropTypes } from "prop-types"
 
-const Communauté = (props) => {
+/**
+ * @description This function will return a page content
+ * @param {string} memberId
+ * 
+ */
+const Communaute = (props) => {
   let {memberId} = props;
   return (
     <div className='communaute generalContent'>
@@ -16,5 +22,8 @@ const Communauté = (props) => {
     </div>
   );
 };
-
-export default Communauté;
+Communaute.propTypes = {
+  props: PropTypes.object,
+  memberId: PropTypes.string
+}
+export default Communaute;

@@ -1,5 +1,8 @@
 import React from 'react';
 
+/**
+ * @description  This function will return a page content
+ */
 const NotFound = () => {
   return (
     <div>

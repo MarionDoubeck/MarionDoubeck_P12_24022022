@@ -1,6 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import { NavLink } from 'react-router-dom';
+import { PropTypes } from "prop-types"
 
+/**
+ * @description This function will return the top menu
+ * @param {object} props memberId
+ * @returns {HTMLElement} navigation : top menu
+ */
 const Navigation = (props) => {
   let {memberId} = props;
   const pathname=window.location.pathname;
@@ -34,5 +40,10 @@ const Navigation = (props) => {
     </div>
   );
 };
+
+Navigation.propTypes = {
+  props: PropTypes.object,
+  memberId: PropTypes.string
+}
 
 export default Navigation;

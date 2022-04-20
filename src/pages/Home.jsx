@@ -9,15 +9,15 @@ import DurationGraph from "../components/Graphs/DurationGraph";
 import KeyData from "../components/Graphs/KeyData"
 import loader from "./../assets/loader.svg";
 import NotFound from "./NotFound";
-
 import { getUserMainData, getUserActivity, getUserAverageSessions, getUserPerformance } from "../utils/GetUserActivity";
-import { formatUserMainData, formatUserActivity, formatUserAverageSessions, formatUserPerformance } from "../utils/formatUserMainData";
+import { FormatUserMainData, FormatUserActivity, FormatUserAverageSessions, FormatUserPerformance } from "../utils/FormatUserMainData";
+import { PropTypes } from "prop-types"
 
 /**
- * This component handles user's home page.
+ * @description This component handles user's home page.
  * Data is loaded in this component and is set with {useState} hook.
  * The API call is done in this component and all graphs are rendered from this component.
- * @component
+ * 
  */
 const Home = (props) => {
   let {memberId} = props;
@@ -47,7 +47,7 @@ const Home = (props) => {
     async function getMainData() {
       try {
         const response = await getUserMainData(userId);
-        setMainData(new formatUserMainData(response.data.data));
+        setMainData(new FormatUserMainData(response.data.data));
         setMainDataIsLoaded(true);
       } catch (error) {
         setMainDataError(true);
@@ -58,7 +58,7 @@ const Home = (props) => {
     async function getActivityData() {
       try {
         const response = await getUserActivity(userId);
-        setActivityData(new formatUserActivity(response.data.data));
+        setActivityData(new FormatUserActivity(response.data.data));
         setActivityDataIsLoaded(true);
       } catch (error) {
         setActivityDataError(true);
@@ -69,7 +69,7 @@ const Home = (props) => {
     async function getAverageData() {
       try {
         const response = await getUserAverageSessions(userId);
-        setAverageData(new formatUserAverageSessions(response.data.data));
+        setAverageData(new FormatUserAverageSessions(response.data.data));
         setAverageDataIsLoaded(true);
       } catch (error) {
         setAverageDataError(true);
@@ -80,7 +80,7 @@ const Home = (props) => {
     async function getPerformance() {
       try {
         const response = await getUserPerformance(userId);
-        setPerformanceData(new formatUserPerformance(response.data.data));
+        setPerformanceData(new FormatUserPerformance(response.data.data));
         setPerformanceDataIsLoaded(true);
       } catch (error) {
         setPerformanceDataError(true);
@@ -140,5 +140,8 @@ const Home = (props) => {
   </div>
   );
 };
-
+Home.propTypes = {
+  props: PropTypes.object,
+  memberId: PropTypes.string
+}
 export default Home;

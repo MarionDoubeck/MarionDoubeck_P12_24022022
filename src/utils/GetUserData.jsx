@@ -1,6 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import LoadingPage from '../pages/LoadingPage';
+import { PropTypes } from "prop-types"
+
+/**
+ * @description gets a user data from backend
+ * backend must run on localhost:3000, otherwise change line 21
+ * @param {{memberId: number, need: string}} props contains the userId and the type of data that is needed
+ *  need could be "userLastName", "userFirstName", "userAge", "userScore", "userCal", "userProt", "userSugar" or "userLipid"
+ * @returns {} data = the data needed
+ */
 
 const GetUserData = (props) => {
   const memberId=props.memberId;
@@ -43,4 +52,9 @@ const GetUserData = (props) => {
   };
 };
 
+GetUserData.propTypes = {
+  props: PropTypes.object,
+  memberId: PropTypes.number,
+  need: PropTypes.string
+}
 export default GetUserData;

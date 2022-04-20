@@ -1,6 +1,15 @@
 import React from 'react';
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis, ResponsiveContainer } from 'recharts';
+import { PropTypes } from "prop-types"
 
+/**
+ * @description This function will accept performance data and return a radarchart
+ * @param {{data: Array, id: number, kind: Array}} props contains : 
+ *        "data" an array of objects withs 3 keys "value", "kind", "type" ("kind"=type of activity number, "type"=type of activity written on frontend)
+ *        "id" the client id
+ *        "kind" an array og object with a numeral key and the corresponding type of activity 
+ * @returns {HTMLElement} RadarChart
+ */
 const ActivityType = (props) => {
   const {data} = props;
   data.data[0].type="Cardio";
@@ -24,5 +33,9 @@ const ActivityType = (props) => {
     </ResponsiveContainer>
   );
 };
+
+ActivityType.propTypes = {
+  data: PropTypes.object
+}
 
 export default ActivityType;

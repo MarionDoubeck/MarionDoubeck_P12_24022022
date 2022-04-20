@@ -3,7 +3,23 @@ import Calories from '../../assets/icons/calories.svg';
 import Prots from '../../assets/icons/prots.svg';
 import Carbs from '../../assets/icons/carbs.svg';
 import Fat from '../../assets/icons/fat.svg';
+import { PropTypes } from "prop-types"
 
+/**
+ * @description This function will accept client's main data and return a react object
+ * @param {object} props with keys : 
+ * age
+ * calorieCount
+ * carbohydrateCount
+ * firstName
+ * id
+ * lastName
+ * lipidCount
+ * proteinCount
+ * score
+ * todayScore
+ * @returns {HTMLElement} key Data on the right hand side of the front end
+ */
 const KeyData = (props) => {
   const {data}=props;
   return (
@@ -31,5 +47,9 @@ const KeyData = (props) => {
     </div>
   );
 };
+
+KeyData.propTypes = {
+  props: PropTypes.object
+}
 
 export default KeyData;

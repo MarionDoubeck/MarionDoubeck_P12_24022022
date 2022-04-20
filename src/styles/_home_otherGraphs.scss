@@ -42,6 +42,10 @@
       height: 100%;
       font-size: 12px;
       background-color: red;
+      .tooltip{
+        background-color: #fff;
+        padding: .5rem 1rem;
+      }
     }
     #activityTypes{
       width: 100%;

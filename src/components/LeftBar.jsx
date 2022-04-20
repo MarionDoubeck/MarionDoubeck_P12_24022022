@@ -4,6 +4,10 @@ import Gym from '../assets/icons/gym.svg';
 import Meditation from '../assets/icons/meditation.svg';
 import Swimming from '../assets/icons/swimming.svg';
 
+/**
+ * @description This function will return the left hand side vertical menu
+ * @returns {HTMLElement} div with className "leftBar", containing the left hand side vertical menu
+ */
 const LeftBar = () => {
   return (
     <div className="leftBar">
