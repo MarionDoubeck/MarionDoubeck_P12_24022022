@@ -6,7 +6,7 @@ import Communaute from './pages/Communaute';
 import Reglage from './pages/Reglage';
 
 /**
- * This function will return the router from the member Id
+ * This function will return the member main page from the member Id
  * @param {object} props either memberId or undefined. In this case member Id is taken from the window current url
  * @returns {HTMLElement} router
  */
