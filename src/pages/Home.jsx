@@ -10,7 +10,7 @@ import KeyData from "../components/Graphs/KeyData"
 import loader from "./../assets/loader.svg";
 import NotFound from "./NotFound";
 import { getUserMainData, getUserActivity, getUserAverageSessions, getUserPerformance } from "../utils/GetUserData";
-import { FormatUserMainData, FormatUserActivity, FormatUserAverageSessions, FormatUserPerformance } from "../utils/FormatUserMainData";
+import { FormatUserMainData, FormatUserActivity, FormatUserAverageSessions, FormatUserPerformance } from "../utils/ClassesOfData";
 import { PropTypes } from "prop-types"
 
 /**
