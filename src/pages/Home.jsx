@@ -43,6 +43,9 @@ const Home = (props) => {
   const [performanceDataIsLoaded, setPerformanceDataIsLoaded] = useState(false);
   const [performanceDataError, setPerformanceDataError] = useState(false);
 
+  /** 
+   * get user data when userId is updated  with async functions awaiting for axios calls (GetUserData.jsx)
+   */
   useEffect(() => {
     async function getMainData() {
       try {
@@ -94,6 +97,7 @@ const Home = (props) => {
     getPerformance();
   }, [userId]);
 
+  /** while at least a *IsLoaded, return loader */
   if ((!mainDataIsLoaded || !activityDataIsLoaded || !averageDataIsLoaded || !performanceDataIsLoaded) && (!mainDataError || !averageDataError || !activityDataError || !performanceDataError)) {
     return (
       <div className="loading">
@@ -101,8 +105,10 @@ const Home = (props) => {
       </div>
     );
   }
+  /** if at least an error, return error page */
   if (mainDataError || averageDataError || activityDataError || performanceDataError) return <NotFound />;
 
+  /** otherwise return homepage with data */
   return (
   <div className='home generalContent'>
     <div className="logo"><Logo memberId={memberId}/></div>
