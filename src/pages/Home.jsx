@@ -9,7 +9,7 @@ import DurationGraph from "../components/Graphs/DurationGraph";
 import KeyData from "../components/Graphs/KeyData"
 import loader from "./../assets/loader.svg";
 import NotFound from "./NotFound";
-import { getUserMainData, getUserActivity, getUserAverageSessions, getUserPerformance } from "../utils/GetUserActivity";
+import { getUserMainData, getUserActivity, getUserAverageSessions, getUserPerformance } from "../utils/GetUserData";
 import { FormatUserMainData, FormatUserActivity, FormatUserAverageSessions, FormatUserPerformance } from "../utils/FormatUserMainData";
 import { PropTypes } from "prop-types"
 
